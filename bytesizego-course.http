@@ -1,0 +1,12 @@
+### GET request to example server
+GET http://localhost:9000/todos
+
+### POST request to add todo item
+POST http://localhost:9000/todos
+
+{
+ "item": "Learn Golang"
+}
+
+### GET request to search for Todos
+GET http://localhost:9000/todos/search/sh

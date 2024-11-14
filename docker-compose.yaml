@@ -1,0 +1,26 @@
+name: bytesizego-course
+version: '3.9'
+
+services:
+  postgres:
+    container_name: bytesizego-course-postgres
+    image: postgres:16.2
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+
+    networks:
+      - bytesizego_course_network
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '$DB_PORT:5432'
+
+networks:
+  bytesizego_course_network:
+    driver: bridge
