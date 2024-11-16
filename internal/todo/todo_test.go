@@ -12,16 +12,16 @@ type MockDB struct {
 	items []db.Item
 }
 
-func (m *MockDB) InsertItem(ctx context.Context, item db.Item) error {
+func (m *MockDB) InsertItem(_ context.Context, item db.Item) error {
 	m.items = append(m.items, item)
 	return nil
 }
 
-func (m *MockDB) GetAllItems(ctx context.Context) ([]db.Item, error) {
+func (m *MockDB) GetAllItems(_ context.Context) ([]db.Item, error) {
 	return m.items, nil
 }
 
-func (m *MockDB) SearchItem(ctx context.Context, searchString string) ([]db.Item, error) {
+func (m *MockDB) SearchItem(_ context.Context, searchString string) ([]db.Item, error) {
 	var items = make([]db.Item, 0)
 	for _, item := range m.items {
 		if strings.Contains(strings.ToLower(item.Task), strings.ToLower(searchString)) {
@@ -31,7 +31,7 @@ func (m *MockDB) SearchItem(ctx context.Context, searchString string) ([]db.Item
 	return items, nil
 }
 
-func (m *MockDB) GetItem(ctx context.Context, task string) *db.Item {
+func (m *MockDB) GetItem(_ context.Context, task string) *db.Item {
 	for _, item := range m.items {
 		if item.Task == task {
 			return &item
